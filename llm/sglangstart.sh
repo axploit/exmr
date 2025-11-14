@@ -1,7 +1,13 @@
 #!/bin/bash
+set -e
 
-rm -rf /exmrsglang
-git clone https://${GITHUB_TKN}@github.com/axploit/sglang-qwen3.git /exmrsglang
-cd /exmrsglang
+rm -rf /workspace
+git clone https://${GITHUB_TKN}@github.com/axploit/sglang-qwen3.git /workspace
+cd /workspace
 git remote set-url origin https://github.com/axploit/sglang-qwen3.git
-bash /exmrsglang/start_server.sh
+
+# Activate conda environment
+eval "$(conda shell.bash hook)"
+conda activate /venv/main
+
+bash start_server.sh
