@@ -5,7 +5,7 @@ echo "Pre-downloading model: $MODEL_NAME"
 
 mkdir -p /workspace
 
-python3 - << EOF
+/venv/main/bin/python3 - << EOF
 from huggingface_hub import snapshot_download
 
 snapshot_download(
