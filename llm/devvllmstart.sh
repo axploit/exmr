@@ -5,6 +5,7 @@ echo "Pre-downloading model: $MODEL_NAME"
 
 mkdir -p /workspace
 
+(
 /venv/main/bin/python3 - << EOF
 from huggingface_hub import snapshot_download
 
@@ -13,6 +14,11 @@ snapshot_download(
     local_dir_use_symlinks=False
 )
 EOF
+) &
+
+DOWNLOAD_PID=$!
+
+echo "Model download started in background (PID=$DOWNLOAD_PID)"
 
 echo "Cloning repository..."
 
@@ -28,4 +34,9 @@ else
 fi
 
 echo "Startup preparation completed"
+
+# Wait for Model to download before starting server
+# wait $DOWNLOAD_PID
+# echo "Model download completed"
+
 # bash start_server.sh
