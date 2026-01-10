@@ -1,7 +1,12 @@
 #!/bin/bash
 set -e
 
-python - << 'EOF'
+: "${MODEL_NAME:?MODEL_NAME is not set}"
+: "${GITHUB_TKN:?GITHUB_TKN is not set}"
+
+echo "Pre-downloading model: $MODEL_NAME"
+
+python - << EOF
 from huggingface_hub import snapshot_download
 
 snapshot_download(
@@ -10,9 +15,18 @@ snapshot_download(
 )
 EOF
 
-rm -rf /workspace/exmrvllm
-git clone https://${GITHUB_TKN}@github.com/axploit/vllm-qwen3.git /workspace/exmrvllm
-cd /workspace/exmrvllm
-git remote set-url origin https://github.com/axploit/vllm-qwen3.git
+echo "Cloning repository..."
 
+if [ ! -d /workspace/exmrvllm/.git ]; then
+
+    git clone https://${GITHUB_TKN}@github.com/axploit/vllm-qwen3.git /workspace/exmrvllm
+    cd /workspace/exmrvllm
+    
+    # Remove token from git remote (security best practice)
+    git remote set-url origin https://github.com/axploit/vllm-qwen3.git
+else
+    cd /workspace/exmrvllm
+fi
+
+echo "Startup preparation completed"
 # bash start_server.sh
