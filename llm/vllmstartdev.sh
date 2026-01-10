@@ -1,12 +1,9 @@
 #!/bin/bash
 set -e
 
-: "${MODEL_NAME:?MODEL_NAME is not set}"
-: "${GITHUB_TKN:?GITHUB_TKN is not set}"
-
 echo "Pre-downloading model: $MODEL_NAME"
 
-python - << EOF
+python3 - << EOF
 from huggingface_hub import snapshot_download
 
 snapshot_download(
