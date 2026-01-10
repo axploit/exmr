@@ -5,7 +5,7 @@ python - << 'EOF'
 from huggingface_hub import snapshot_download
 
 snapshot_download(
-    repo_id="Qwen/Qwen3-VL-8B-Instruct",
+    repo_id="${MODEL_NAME}",
     local_dir_use_symlinks=False
 )
 EOF
