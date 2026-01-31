@@ -8,11 +8,18 @@ mkdir -p /workspace
 (
 /venv/main/bin/python3 - << EOF
 from huggingface_hub import snapshot_download
-
-snapshot_download(
-    repo_id="${MODEL_NAME}",
-    local_dir_use_symlinks=False
-)
+embd_model_name = "${EMBED_MODEL_NAME}"
+chat_model_name = "${MODEL_NAME}"
+if embd_model_name!="":
+    snapshot_download(
+        repo_id=embd_model_name,
+        local_dir_use_symlinks=False
+    )
+if chat_model_name!="":
+    snapshot_download(
+        repo_id=chat_model_name,
+        local_dir_use_symlinks=False
+    )
 EOF
 ) &
 
