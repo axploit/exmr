@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-: "${MODEL_NAME:?MODEL_NAME is not set}"
 : "${GITHUB_TKN:?GITHUB_TKN is not set}"
+# : "${MODEL_NAME:?MODEL_NAME is not set}"
 
 echo "Pre-downloading model: $MODEL_NAME"
 
