@@ -38,7 +38,7 @@ cd /workspace/comfyui/
 
 echo "Startup Server"
 
-python3 main.py --listen 0.0.0.0 --port $PORT >> server.log 2>&1
+/venv/main/bin/python3 -u main.py --listen 0.0.0.0 --port $PORT >> server.log 2>&1
 EOF
 
 chmod +x /workspace/comfyui/start_server.sh
