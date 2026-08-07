@@ -29,8 +29,6 @@ EOF
 DOWNLOAD_PID=$!
 
 echo "Model download started in background (PID=$DOWNLOAD_PID)"
-wait $DOWNLOAD_PID
-echo "Model download completed"
 
 echo "Cloning repository..."
 
@@ -48,7 +46,7 @@ fi
 echo "Startup preparation completed"
 
 # Wait for Model to download before starting server
-# wait $DOWNLOAD_PID
-# echo "Model download completed"
+wait $DOWNLOAD_PID
+echo "Model download completed"
 
 bash start_server.sh
