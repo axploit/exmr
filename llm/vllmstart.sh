@@ -29,6 +29,8 @@ EOF
 DOWNLOAD_PID=$!
 
 echo "Model download started in background (PID=$DOWNLOAD_PID)"
+wait $DOWNLOAD_PID
+echo "Model download completed"
 
 echo "Cloning repository..."
 
